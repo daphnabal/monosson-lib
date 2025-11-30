@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חידוש מנוי לספרייה 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-purple': '#E0BBE4',
+                        'soft-lavender': '#957DAD',
+                        'soft-teal': '#D291BC',
+                        'soft-mint': '#FEC8D8',
+                        'soft-cream': '#FFDFD3'
+                    },
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#E0BBE4 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* כפתורי בחירה */
+        .option-btn {
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            transform: scale(1.05);
+            background-color: #FEC8D8; /* soft-mint */
+            border-color: #D291BC;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 text-gray-700">
+
+    <div class="bg-white/95 backdrop-blur-sm w-full max-w-3xl rounded-[2rem] shadow-xl overflow-hidden border-4 border-white">
+        
+        <div class="bg-gradient-to-l from-soft-purple to-soft-lavender p-6 text-white text-center">
+            <h1 class="text-3xl font-bold mb-2">📚 הספרייה שלנו</h1>
+            <p class="text-lg opacity-90">בואו נמצא את המנוי המושלם ל-2026</p>
+        </div>
+
+        <div class="p-6 md:p-8 min-h-[450px] flex flex-col justify-center items-center relative">
+            
+            <div id="stage-welcome" class="text-center w-full fade-in max-w-lg">
+                <div class="text-6xl mb-6">👋</div>
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">היי! איזה כיף שאתם כאן.</h2>
+                <p class="text-lg text-gray-600 mb-8">אנחנו רוצים לעזור לכם לבחור את המנוי שהכי יתאים למשפחה שלכם השנה.<br>זה ייקח בדיוק חצי דקה.</p>
+                <button onclick="nextStage('stage-family')" class="bg-soft-lavender hover:bg-purple-500 text-white font-bold py-4 px-12 rounded-full text-xl shadow-lg transform transition hover:scale-105">
+                    בואו נתחיל!
+                </button>
+            </div>
+
+            <div id="stage-family" class="hidden text-center w-full fade-in">
+                <div class="text-5xl mb-6">👨‍👩‍👧‍👦</div>
+                <h2 class="text-2xl font-bold mb-8">כמה נפשות אתם במשפחה?</h2>
+                
+                <div class="flex justify-center gap-3 flex-wrap mb-8">
+                    <button onclick="setFamilySize(1)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">1</button>
+                    <button onclick="setFamilySize(2)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">2</button>
+                    <button onclick="setFamilySize(3)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">3</button>
+                    <button onclick="setFamilySize(4)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">4</button>
+                    <button onclick="setFamilySize(5)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">5+</button>
+                </div>
+            </div>
+
+            <div id="stage-books" class="hidden text-center w-full fade-in max-w-xl">
+                <div class="text-5xl mb-6">📖</div>
+                <h2 class="text-2xl font-bold mb-2">כמה ספרים אתם קוראים בחודש?</h2>
+                <p class="text-gray-500 mb-8 text-sm">(סך הכל לכל המשפחה, בערך)</p>
+                
+                <div class="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
+                    <button onclick="setBooksAndCalc(1)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">1</button>
+                    <button onclick="setBooksAndCalc(2)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">2</button>
+                    <button onclick="setBooksAndCalc(3)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">3</button>
+                    <button onclick="setBooksAndCalc(4)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">4</button>
+                    <button onclick="setBooksAndCalc(5)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">5</button>
+                    <button onclick="setBooksAndCalc(6)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">6</button>
+                    <button onclick="setBooksAndCalc(8)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent text-sm">יותר מ-6</button>
+                    <button onclick="setBooksAndCalc(3)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent text-sm">לא יודע/ת</button>
+                </div>
+            </div>
+
+            <div id="stage-processing" class="hidden text-center w-full fade-in">
+                <div class="animate-bounce text-6xl mb-4">🤔</div>
+                <h2 class="text-xl font-medium text-gray-600">הרובוט שלנו מחשב את המסלול המשתלם...</h2>
+            </div>
+
+            <div id="stage-results" class="hidden w-full fade-in pb-8">
+                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">הנה מה שהכי מתאים לכם:</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end" id="results-container">
+                    </div>
+
+                <div class="mt-8 text-center bg-yellow-50 border border-yellow-100 rounded-xl p-4 max-w-2xl mx-auto">
+                    <p class="text-gray-600 text-sm md:text-base flex items-center justify-center gap-2">
+                        <span>❤️</span>
+                        <b>חשוב לדעת:</b> 
+                        כל ההכנסות משמשות לקניית ספרים חדשים ולתחזוקת ושיפור הספרייה עבורכם.
+                    </p>
+                </div>
+
+                <div class="text-center mt-6">
+                    <button onclick="location.reload()" class="text-gray-400 underline hover:text-gray-600 text-sm">התחל מחדש</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // === נתונים ===
+        const plans = [
+            { id: 1, name: "מנוי 1", price: 144, booksHe: 2, booksEn: 1, games: 1 },
+            { id: 2, name: "מנוי וחצי", price: 180, booksHe: 3, booksEn: 1, games: 1 },
+            { id: 3, name: "2 מינויים", price: 225, booksHe: 4, booksEn: 2, games: 2 },
+            { id: 4, name: "3 מינויים", price: 270, booksHe: 6, booksEn: 3, games: 3 },
+            { id: 5, name: "4 מינויים", price: 315, booksHe: 8, booksEn: 4, games: 4 },
+            { id: 6, name: "5 מינויים", price: 360, booksHe: 10, booksEn: 5, games: 5 }
+        ];
+
+        let userFamilySize = 1;
+        let userBooksPerMonth = 3;
+
+        function nextStage(stageId) {
+            document.querySelectorAll('[id^="stage-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById(stageId).classList.remove('hidden');
+        }
+
+        function setFamilySize(size) {
+            userFamilySize = size;
+            nextStage('stage-books');
+        }
+
+        function setBooksAndCalc(books) {
+            userBooksPerMonth = books;
+            calculateAndShowResults();
+        }
+
+        function calculateAndShowResults() {
+            nextStage('stage-processing');
+
+            setTimeout(() => {
+                // 1. חישוב עוגן לפי גודל משפחה
+                let baseIndex = 0;
+                if (userFamilySize === 1) baseIndex = 0; 
+                else if (userFamilySize === 2) baseIndex = 2; 
+                else if (userFamilySize === 3) baseIndex = 3; 
+                else if (userFamilySize === 4) baseIndex = 4; 
+                else if (userFamilySize >= 5) baseIndex = 5; 
+
+                // 2. בדיקה האם כמות הספרים מספיקה (Upsell)
+                while (baseIndex < plans.length - 1 && plans[baseIndex].booksHe < userBooksPerMonth) {
+                    baseIndex++;
+                }
+
+                // 3. בחירת 3 האופציות
+                if (baseIndex > plans.length - 3) {
+                    baseIndex = plans.length - 3; 
+                }
+
+                // מערך האופציות הנבחרות
+                const selectedPlans = [
+                    { plan: plans[baseIndex], type: 'saver', title: 'הכי משתלם', badge: null },
+                    { plan: plans[baseIndex + 1], type: 'standard', title: 'המומלץ שלנו ⭐', badge: 'best' },
+                    { plan: plans[baseIndex + 2], type: 'pro', title: 'מטיבי לכת', badge: null }
+                ];
+
+                renderCards(selectedPlans);
+                nextStage('stage-results');
+
+            }, 1200);
+        }
+
+        function renderCards(options) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = '';
+
+            // משתנה עזר לשמירת המחיר של המנוי הקודם לצורך השוואה
+            let previousPrice = 0;
+
+            options.forEach((opt, index) => {
+                const plan = opt.plan;
+                const isStandard = opt.type === 'standard';
+                
+                // עיצוב לפי סוג כרטיס
+                const borderClass = isStandard ? 'border-4 border-soft-lavender scale-105 z-10' : 'border border-gray-200';
+                const bgClass = isStandard ? 'bg-white shadow-2xl' : 'bg-gray-50 shadow-md';
+                const btnClass = isStandard ? 'bg-soft-lavender text-white hover:bg-purple-400' : 'bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-100';
+
+                // חישוב תוספת מחיר חודשית
+                let priceDiffHtml = '';
+                if (index > 0) { // לא עושים את זה לכרטיס הראשון
+                    const diffYearly = plan.price - previousPrice;
+                    const diffMonthly = Math.ceil(diffYearly / 12);
+                    
+                    if (diffMonthly > 0) {
+                        priceDiffHtml = `
+                        <div class="mt-2 text-xs bg-green-100 text-green-800 inline-block px-2 py-1 rounded-full font-bold">
+                             בתוספת של ${diffMonthly} ₪ בלבד לחודש
+                        </div>`;
+                    }
+                }
+                
+                // עדכון המחיר הקודם לאיטרציה הבאה
+                previousPrice = plan.price;
+
+                const html = `
+                <div class="${bgClass} ${borderClass} rounded-2xl p-4 flex flex-col relative transition-all duration-300 h-full justify-between">
+                    
+                    ${isStandard ? '<div class="absolute -top-3 right-1/2 transform translate-x-1/2 bg-soft-lavender text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">בחירה מצוינת</div>' : ''}
+                    
+                    <div>
+                        <div class="text-center mb-4 border-b pb-4 border-gray-100">
+                            <div class="text-sm text-gray-400 font-bold tracking-wide uppercase mb-1">${opt.title}</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">${plan.name}</h3>
+                            <div class="text-3xl font-extrabold text-soft-teal">${plan.price} ₪ <span class="text-sm font-normal text-gray-400">/שנה</span></div>
+                            ${priceDiffHtml}
+                        </div>
+
+                        <div class="space-y-2 text-sm mb-6 text-gray-600 px-2">
+                            <div class="flex items-center gap-2"><span class="text-lg">📚</span> <strong>${plan.booksHe}</strong> ספרי קריאה בעברית</div>
+                            <div class="flex items-center gap-2"><span class="text-lg">🇬🇧</span> <strong>${plan.booksEn}</strong> ספרי קריאה באנגלית</div>
+                            <div class="flex items-center gap-2"><span class="text-lg">🎲</span> <strong>${plan.games}</strong> משחקי קופסא</div>
+                            <div class="flex items-center gap-2"><span class="text-lg">📰</span> <strong>${plan.games}</strong> כתבי עת</div>
+                            <div class="flex items-center gap-2 opacity-75"><span class="text-lg">📱</span> גישה לספרים דיגיטליים</div>
+                        </div>
+                    </div>
+
+                    <button class="w-full py-3 rounded-xl font-bold ${btnClass} transition shadow-sm">
+                        בחר מנוי זה
+                    </button>
+                </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+    </script>
+</body>
+</html>
