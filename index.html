@@ -105,6 +105,10 @@
             font-weight: bold;
         }
 
+        .character-card.selected .book-title {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         .character-card.selected::after {
             content: "✓";
             position: absolute;
@@ -136,22 +140,27 @@
         }
 
         .character-image {
-            width: 100%;
+            width: 200px;
             height: 200px;
             object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            margin: 0 auto 15px;
+            display: block;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .character-name {
             font-size: 1.5rem;
             color: #333;
             font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .book-title {
+            font-size: 1rem;
+            color: #999;
+            margin-top: 5px;
             transition: color 0.3s ease;
         }
 
@@ -485,17 +494,17 @@
         // Admin password (change this!)
         const ADMIN_PASSWORD = "6164";
 
-        // Character data - Replace with actual character names and images
+        // Character data - Actual characters from the library
         const characters = [
-            { id: 1, name: "דמות 1", image: "char1.png", emoji: "🦁" },
-            { id: 2, name: "דמות 2", image: "char2.png", emoji: "🐻" },
-            { id: 3, name: "דמות 3", image: "char3.png", emoji: "🐼" },
-            { id: 4, name: "דמות 4", image: "char4.png", emoji: "🐸" },
-            { id: 5, name: "דמות 5", image: "char5.png", emoji: "🦊" },
-            { id: 6, name: "דמות 6", image: "char6.png", emoji: "🐰" },
-            { id: 7, name: "דמות 7", image: "char7.png", emoji: "🐨" },
-            { id: 8, name: "דמות 8", image: "char8.png", emoji: "🐯" },
-            { id: 9, name: "דמות 9", image: "char9.png", emoji: "🦄" }
+            { id: 1, name: "אן שרלי", book: "האסופית", image: "char1.png" },
+            { id: 2, name: "ירון זהבי חסמבה", book: "ירון זהבי חסמבה", image: "char2.png" },
+            { id: 3, name: "בילבי", book: "בילבי בת גרב", image: "char3.png" },
+            { id: 4, name: "ציון כהן", book: "אל עצמי", image: "char4.png" },
+            { id: 5, name: "הרמיוני", book: "הארי פוטר", image: "char5.png" },
+            { id: 6, name: "אייבי ובין", book: "אייבי ובין", image: "char6.png" },
+            { id: 7, name: "הנסיך הקטן", book: "הנסיך הקטן", image: "char7.png" },
+            { id: 8, name: "ליסה", book: "מדריך לגיבורות על", image: "char8.png" },
+            { id: 9, name: "אודי שחר", book: "ג'ינג'י", image: "char9.png" }
         ];
 
         let selectedCharacter = null;
@@ -510,10 +519,10 @@
                 card.dataset.id = character.id;
                 
                 card.innerHTML = `
-                    <div class="character-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
-                        ${character.emoji}
-                    </div>
+                    <img src="${character.image}" alt="${character.name}" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 100%; height: 200px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: 15px; margin-bottom: 15px; align-items: center; justify-content: center; font-size: 3rem;">📚</div>
                     <div class="character-name">${character.name}</div>
+                    <div class="book-title">${character.book}</div>
                 `;
                 
                 card.addEventListener('click', () => selectCharacter(character.id));
