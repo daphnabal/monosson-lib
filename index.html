@@ -1,257 +1,722 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>חידוש מנוי לספרייה 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'soft-purple': '#E0BBE4',
-                        'soft-lavender': '#957DAD',
-                        'soft-teal': '#D291BC',
-                        'soft-mint': '#FEC8D8',
-                        'soft-cream': '#FFDFD3'
-                    },
-                    fontFamily: {
-                        sans: ['Rubik', 'sans-serif'],
-                    }
-                }
+    <title>הצבעה לדמות האהובה - ספריית נווה מונוסון</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .admin-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .admin-button:hover {
+            opacity: 1;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .character-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 4px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .character-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .character-card.selected .character-name {
+            color: white;
+            font-weight: bold;
+        }
+
+        .character-card.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #4CAF50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            animation: checkmark 0.3s ease;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
             }
         }
-    </script>
-    <style>
-        body {
-            background-color: #fdfbf7;
-            background-image: radial-gradient(#E0BBE4 1px, transparent 1px);
-            background-size: 20px 20px;
+
+        .character-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+
+        .character-name {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .vote-section {
+            text-align: center;
+        }
+
+        .vote-button {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            font-family: inherit;
+        }
+
+        .vote-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6);
+        }
+
+        .vote-button:active {
+            transform: translateY(-2px);
+        }
+
+        .vote-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        /* כפתורי בחירה */
-        .option-btn {
-            transition: all 0.2s;
+
+        .modal-content {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-        .option-btn:hover {
-            transform: scale(1.05);
-            background-color: #FEC8D8; /* soft-mint */
-            border-color: #D291BC;
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            text-align: right;
+        }
+
+        .admin-panel h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .vote-stats {
+            background: #f5f7fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-character {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-count {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .admin-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .admin-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .export-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .export-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .clear-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+        }
+
+        .close-btn {
+            background: #666;
+            color: white;
+        }
+
+        .close-btn:hover {
+            background: #555;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .total-votes {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .characters-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .character-image {
+                height: 150px;
+            }
+
+            .character-name {
+                font-size: 1.2rem;
+            }
+
+            .vote-button {
+                padding: 15px 40px;
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .modal-content {
+                padding: 30px;
+                margin: 20px;
+            }
+
+            .modal-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .characters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Touch-friendly enhancements */
+        @media (hover: none) and (pointer: coarse) {
+            .character-card {
+                padding: 25px;
+            }
+
+            .vote-button {
+                padding: 25px 70px;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 text-gray-700">
-
-    <div class="bg-white/95 backdrop-blur-sm w-full max-w-3xl rounded-[2rem] shadow-xl overflow-hidden border-4 border-white">
-        
-        <div class="bg-gradient-to-l from-soft-purple to-soft-lavender p-6 text-white text-center">
-            <h1 class="text-3xl font-bold mb-2">📚 הספרייה שלנו</h1>
-            <p class="text-lg opacity-90">בואו נמצא את המנוי המושלם ל-2026</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="admin-button" onclick="showAdminPanel()" title="Admin Panel">⚙️</button>
+            <div style="font-size: 3rem; margin-bottom: 20px;">📚</div>
+            <h1>ספריית נווה מונוסון</h1>
+            <p class="subtitle">הצביעו לדמות האהובה עליכם!</p>
         </div>
 
-        <div class="p-6 md:p-8 min-h-[450px] flex flex-col justify-center items-center relative">
-            
-            <div id="stage-welcome" class="text-center w-full fade-in max-w-lg">
-                <div class="text-6xl mb-6">👋</div>
-                <h2 class="text-2xl font-bold mb-4 text-gray-800">היי! איזה כיף שאתם כאן.</h2>
-                <p class="text-lg text-gray-600 mb-8">אנחנו רוצים לעזור לכם לבחור את המנוי שהכי יתאים למשפחה שלכם השנה.<br>זה ייקח בדיוק חצי דקה.</p>
-                <button onclick="nextStage('stage-family')" class="bg-soft-lavender hover:bg-purple-500 text-white font-bold py-4 px-12 rounded-full text-xl shadow-lg transform transition hover:scale-105">
-                    בואו נתחיל!
-                </button>
+        <div class="characters-grid" id="charactersGrid">
+            <!-- Characters will be dynamically inserted here -->
+        </div>
+
+        <div class="vote-section">
+            <button class="vote-button" id="voteButton" disabled>הצביעו עכשיו! 🗳️</button>
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">🎉</div>
+            <h2>תודה רבה!</h2>
+            <p>הצבעתך נקלטה בהצלחה!</p>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content admin-panel">
+            <h2>⚙️ פאנל ניהול</h2>
+            <div id="adminContent">
+                <input type="password" id="adminPassword" class="password-input" placeholder="הזן סיסמה" />
+                <button class="admin-btn export-btn" onclick="checkPassword()">כניסה</button>
             </div>
-
-            <div id="stage-family" class="hidden text-center w-full fade-in">
-                <div class="text-5xl mb-6">👨‍👩‍👧‍👦</div>
-                <h2 class="text-2xl font-bold mb-8">כמה נפשות אתם במשפחה?</h2>
-                
-                <div class="flex justify-center gap-3 flex-wrap mb-8">
-                    <button onclick="setFamilySize(1)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">1</button>
-                    <button onclick="setFamilySize(2)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">2</button>
-                    <button onclick="setFamilySize(3)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">3</button>
-                    <button onclick="setFamilySize(4)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">4</button>
-                    <button onclick="setFamilySize(5)" class="option-btn w-16 h-16 rounded-2xl bg-gray-100 text-2xl font-bold shadow-sm border-2 border-transparent">5+</button>
-                </div>
-            </div>
-
-            <div id="stage-books" class="hidden text-center w-full fade-in max-w-xl">
-                <div class="text-5xl mb-6">📖</div>
-                <h2 class="text-2xl font-bold mb-2">כמה ספרים אתם קוראים בחודש?</h2>
-                <p class="text-gray-500 mb-8 text-sm">(סך הכל לכל המשפחה, בערך)</p>
-                
-                <div class="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
-                    <button onclick="setBooksAndCalc(1)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">1</button>
-                    <button onclick="setBooksAndCalc(2)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">2</button>
-                    <button onclick="setBooksAndCalc(3)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">3</button>
-                    <button onclick="setBooksAndCalc(4)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">4</button>
-                    <button onclick="setBooksAndCalc(5)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">5</button>
-                    <button onclick="setBooksAndCalc(6)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent">6</button>
-                    <button onclick="setBooksAndCalc(8)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent text-sm">יותר מ-6</button>
-                    <button onclick="setBooksAndCalc(3)" class="option-btn py-4 rounded-xl bg-gray-100 font-bold shadow-sm border-2 border-transparent text-sm">לא יודע/ת</button>
-                </div>
-            </div>
-
-            <div id="stage-processing" class="hidden text-center w-full fade-in">
-                <div class="animate-bounce text-6xl mb-4">🤔</div>
-                <h2 class="text-xl font-medium text-gray-600">הרובוט שלנו מחשב את המסלול המשתלם...</h2>
-            </div>
-
-            <div id="stage-results" class="hidden w-full fade-in pb-8">
-                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">הנה מה שהכי מתאים לכם:</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end" id="results-container">
-                    </div>
-
-                <div class="mt-8 text-center bg-yellow-50 border border-yellow-100 rounded-xl p-4 max-w-2xl mx-auto">
-                    <p class="text-gray-600 text-sm md:text-base flex items-center justify-center gap-2">
-                        <span>❤️</span>
-                        <b>חשוב לדעת:</b> 
-                        כל ההכנסות משמשות לקניית ספרים חדשים ולתחזוקת ושיפור הספרייה עבורכם.
-                    </p>
-                </div>
-
-                <div class="text-center mt-6">
-                    <button onclick="location.reload()" class="text-gray-400 underline hover:text-gray-600 text-sm">התחל מחדש</button>
-                </div>
-            </div>
-
         </div>
     </div>
 
     <script>
-        // === נתונים ===
-        const plans = [
-            { id: 1, name: "מנוי 1", price: 144, booksHe: 2, booksEn: 1, games: 1 },
-            { id: 2, name: "מנוי וחצי", price: 180, booksHe: 3, booksEn: 1, games: 1 },
-            { id: 3, name: "2 מינויים", price: 225, booksHe: 4, booksEn: 2, games: 2 },
-            { id: 4, name: "3 מינויים", price: 270, booksHe: 6, booksEn: 3, games: 3 },
-            { id: 5, name: "4 מינויים", price: 315, booksHe: 8, booksEn: 4, games: 4 },
-            { id: 6, name: "5 מינויים", price: 360, booksHe: 10, booksEn: 5, games: 5 }
+        // Admin password (change this!)
+        const ADMIN_PASSWORD = "6164";
+
+        // Character data - Replace with actual character names and images
+        const characters = [
+            { id: 1, name: "דמות 1", image: "char1.png", emoji: "🦁" },
+            { id: 2, name: "דמות 2", image: "char2.png", emoji: "🐻" },
+            { id: 3, name: "דמות 3", image: "char3.png", emoji: "🐼" },
+            { id: 4, name: "דמות 4", image: "char4.png", emoji: "🐸" },
+            { id: 5, name: "דמות 5", image: "char5.png", emoji: "🦊" },
+            { id: 6, name: "דמות 6", image: "char6.png", emoji: "🐰" },
+            { id: 7, name: "דמות 7", image: "char7.png", emoji: "🐨" },
+            { id: 8, name: "דמות 8", image: "char8.png", emoji: "🐯" },
+            { id: 9, name: "דמות 9", image: "char9.png", emoji: "🦄" }
         ];
 
-        let userFamilySize = 1;
-        let userBooksPerMonth = 3;
+        let selectedCharacter = null;
 
-        function nextStage(stageId) {
-            document.querySelectorAll('[id^="stage-"]').forEach(el => el.classList.add('hidden'));
-            document.getElementById(stageId).classList.remove('hidden');
-        }
-
-        function setFamilySize(size) {
-            userFamilySize = size;
-            nextStage('stage-books');
-        }
-
-        function setBooksAndCalc(books) {
-            userBooksPerMonth = books;
-            calculateAndShowResults();
-        }
-
-        function calculateAndShowResults() {
-            nextStage('stage-processing');
-
-            setTimeout(() => {
-                // 1. חישוב עוגן לפי גודל משפחה
-                let baseIndex = 0;
-                if (userFamilySize === 1) baseIndex = 0; 
-                else if (userFamilySize === 2) baseIndex = 2; 
-                else if (userFamilySize === 3) baseIndex = 3; 
-                else if (userFamilySize === 4) baseIndex = 4; 
-                else if (userFamilySize >= 5) baseIndex = 5; 
-
-                // 2. בדיקה האם כמות הספרים מספיקה (Upsell)
-                while (baseIndex < plans.length - 1 && plans[baseIndex].booksHe < userBooksPerMonth) {
-                    baseIndex++;
-                }
-
-                // 3. בחירת 3 האופציות
-                if (baseIndex > plans.length - 3) {
-                    baseIndex = plans.length - 3; 
-                }
-
-                // מערך האופציות הנבחרות
-                const selectedPlans = [
-                    { plan: plans[baseIndex], type: 'saver', title: 'הכי משתלם', badge: null },
-                    { plan: plans[baseIndex + 1], type: 'standard', title: 'המומלץ שלנו ⭐', badge: 'best' },
-                    { plan: plans[baseIndex + 2], type: 'pro', title: 'מטיבי לכת', badge: null }
-                ];
-
-                renderCards(selectedPlans);
-                nextStage('stage-results');
-
-            }, 1200);
-        }
-
-        function renderCards(options) {
-            const container = document.getElementById('results-container');
-            container.innerHTML = '';
-
-            // משתנה עזר לשמירת המחיר של המנוי הקודם לצורך השוואה
-            let previousPrice = 0;
-
-            options.forEach((opt, index) => {
-                const plan = opt.plan;
-                const isStandard = opt.type === 'standard';
+        // Initialize the grid
+        function initializeGrid() {
+            const grid = document.getElementById('charactersGrid');
+            
+            characters.forEach(character => {
+                const card = document.createElement('div');
+                card.className = 'character-card';
+                card.dataset.id = character.id;
                 
-                // עיצוב לפי סוג כרטיס
-                const borderClass = isStandard ? 'border-4 border-soft-lavender scale-105 z-10' : 'border border-gray-200';
-                const bgClass = isStandard ? 'bg-white shadow-2xl' : 'bg-gray-50 shadow-md';
-                const btnClass = isStandard ? 'bg-soft-lavender text-white hover:bg-purple-400' : 'bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-100';
-
-                // חישוב תוספת מחיר חודשית
-                let priceDiffHtml = '';
-                if (index > 0) { // לא עושים את זה לכרטיס הראשון
-                    const diffYearly = plan.price - previousPrice;
-                    const diffMonthly = Math.ceil(diffYearly / 12);
-                    
-                    if (diffMonthly > 0) {
-                        priceDiffHtml = `
-                        <div class="mt-2 text-xs bg-green-100 text-green-800 inline-block px-2 py-1 rounded-full font-bold">
-                             בתוספת של ${diffMonthly} ₪ בלבד לחודש
-                        </div>`;
-                    }
-                }
-                
-                // עדכון המחיר הקודם לאיטרציה הבאה
-                previousPrice = plan.price;
-
-                const html = `
-                <div class="${bgClass} ${borderClass} rounded-2xl p-4 flex flex-col relative transition-all duration-300 h-full justify-between">
-                    
-                    ${isStandard ? '<div class="absolute -top-3 right-1/2 transform translate-x-1/2 bg-soft-lavender text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">בחירה מצוינת</div>' : ''}
-                    
-                    <div>
-                        <div class="text-center mb-4 border-b pb-4 border-gray-100">
-                            <div class="text-sm text-gray-400 font-bold tracking-wide uppercase mb-1">${opt.title}</div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-1">${plan.name}</h3>
-                            <div class="text-3xl font-extrabold text-soft-teal">${plan.price} ₪ <span class="text-sm font-normal text-gray-400">/שנה</span></div>
-                            ${priceDiffHtml}
-                        </div>
-
-                        <div class="space-y-2 text-sm mb-6 text-gray-600 px-2">
-                            <div class="flex items-center gap-2"><span class="text-lg">📚</span> <strong>${plan.booksHe}</strong> ספרי קריאה בעברית</div>
-                            <div class="flex items-center gap-2"><span class="text-lg">🇬🇧</span> <strong>${plan.booksEn}</strong> ספרי קריאה באנגלית</div>
-                            <div class="flex items-center gap-2"><span class="text-lg">🎲</span> <strong>${plan.games}</strong> משחקי קופסא</div>
-                            <div class="flex items-center gap-2"><span class="text-lg">📰</span> <strong>${plan.games}</strong> כתבי עת</div>
-                            <div class="flex items-center gap-2 opacity-75"><span class="text-lg">📱</span> גישה לספרים דיגיטליים</div>
-                        </div>
+                card.innerHTML = `
+                    <div class="character-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        ${character.emoji}
                     </div>
-
-                    <button class="w-full py-3 rounded-xl font-bold ${btnClass} transition shadow-sm">
-                        בחר מנוי זה
-                    </button>
-                </div>
+                    <div class="character-name">${character.name}</div>
                 `;
-                container.innerHTML += html;
+                
+                card.addEventListener('click', () => selectCharacter(character.id));
+                grid.appendChild(card);
             });
         }
+
+        // Handle character selection
+        function selectCharacter(id) {
+            document.querySelectorAll('.character-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            const selectedCard = document.querySelector(`[data-id="${id}"]`);
+            selectedCard.classList.add('selected');
+            
+            selectedCharacter = id;
+            document.getElementById('voteButton').disabled = false;
+            document.getElementById('errorMessage').textContent = '';
+        }
+
+        // Handle vote submission
+        function submitVote() {
+            if (!selectedCharacter) {
+                document.getElementById('errorMessage').textContent = 'אנא בחרו דמות לפני ההצבעה';
+                return;
+            }
+
+            const voteButton = document.getElementById('voteButton');
+            voteButton.disabled = true;
+            voteButton.textContent = 'שולח הצבעה...';
+
+            // Save vote to localStorage
+            saveVote(selectedCharacter);
+
+            // Show success
+            setTimeout(() => {
+                showSuccessModal();
+            }, 300);
+        }
+
+        // Save vote to localStorage
+        function saveVote(characterId) {
+            const characterName = characters.find(c => c.id === characterId).name;
+            const timestamp = new Date().toISOString();
+            
+            // Get existing votes
+            let votes = JSON.parse(localStorage.getItem('libraryVotes') || '[]');
+            
+            // Add new vote
+            votes.push({
+                character_id: characterId,
+                character_name: characterName,
+                timestamp: timestamp
+            });
+            
+            // Save back to localStorage
+            localStorage.setItem('libraryVotes', JSON.stringify(votes));
+        }
+
+        // Show success modal
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('show');
+            
+            setTimeout(() => {
+                modal.classList.remove('show');
+                resetVoting();
+            }, 3000);
+        }
+
+        // Reset voting interface
+        function resetVoting() {
+            selectedCharacter = null;
+            document.querySelectorAll('.character-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('voteButton').disabled = true;
+            document.getElementById('voteButton').textContent = 'הצביעו עכשיו! 🗳️';
+            document.getElementById('errorMessage').textContent = '';
+        }
+
+        // Admin Panel Functions
+        function showAdminPanel() {
+            document.getElementById('adminModal').classList.add('show');
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminPassword').focus();
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                showAdminStats();
+            } else {
+                alert('סיסמה שגויה!');
+            }
+        }
+
+        function showAdminStats() {
+            const votes = JSON.parse(localStorage.getItem('libraryVotes') || '[]');
+            
+            // Calculate statistics
+            const stats = {};
+            characters.forEach(char => {
+                stats[char.id] = { name: char.name, count: 0 };
+            });
+            
+            votes.forEach(vote => {
+                if (stats[vote.character_id]) {
+                    stats[vote.character_id].count++;
+                }
+            });
+
+            // Build stats HTML
+            let statsHTML = `
+                <div class="total-votes">סה"כ הצבעות: ${votes.length}</div>
+                <div class="vote-stats">
+            `;
+            
+            Object.values(stats).forEach(stat => {
+                statsHTML += `
+                    <div class="stat-row">
+                        <span class="stat-character">${stat.name}</span>
+                        <span class="stat-count">${stat.count}</span>
+                    </div>
+                `;
+            });
+            
+            statsHTML += `
+                </div>
+                <div class="admin-buttons">
+                    <button class="admin-btn export-btn" onclick="exportVotes()">📥 יצוא לקובץ CSV</button>
+                    <button class="admin-btn clear-btn" onclick="clearVotes()">🗑️ מחק את כל ההצבעות</button>
+                    <button class="admin-btn close-btn" onclick="closeAdmin()">סגור</button>
+                </div>
+            `;
+
+            document.getElementById('adminContent').innerHTML = statsHTML;
+        }
+
+        function exportVotes() {
+            const votes = JSON.parse(localStorage.getItem('libraryVotes') || '[]');
+            
+            if (votes.length === 0) {
+                alert('אין הצבעות לייצוא!');
+                return;
+            }
+
+            // Create CSV content
+            let csv = 'Character ID,Character Name,Timestamp\n';
+            votes.forEach(vote => {
+                csv += `${vote.character_id},"${vote.character_name}",${vote.timestamp}\n`;
+            });
+
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `library_votes_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            alert('הקובץ הורד בהצלחה!');
+        }
+
+        function clearVotes() {
+            if (confirm('האם אתה בטוח שברצונך למחוק את כל ההצבעות? פעולה זו אינה הפיכה!')) {
+                localStorage.removeItem('libraryVotes');
+                alert('כל ההצבעות נמחקו!');
+                showAdminStats(); // Refresh stats
+            }
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').classList.remove('show');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        }
+
+        // Allow Enter key for password
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        });
+
+        // Event listeners
+        document.getElementById('voteButton').addEventListener('click', submitVote);
+
+        // Initialize on page load
+        initializeGrid();
     </script>
 </body>
 </html>
