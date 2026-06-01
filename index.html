@@ -34,6 +34,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column; /* Stacks header, grid, and footer */
+            position: relative;
         }
 
         .header {
@@ -52,11 +53,13 @@
             font-size: clamp(1.2rem, 3vh, 1.5rem);
             cursor: pointer;
             opacity: 0.3;
+            z-index: 100;
             transition: opacity 0.3s;
         }
 
         .admin-button:hover {
             opacity: 1;
+            transform: scale(1.1);
         }
 
         .header-icon {
