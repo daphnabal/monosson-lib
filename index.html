@@ -14,9 +14,9 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh; /* Locks the body to exactly the screen height */
+            height: 100vh;
             width: 100vw;
-            overflow: hidden; /* Kills vertical and horizontal scrolling */
+            overflow: hidden;
             padding: 2vh 2vw;
             direction: rtl;
             display: flex;
@@ -27,13 +27,13 @@
         .container {
             width: 100%;
             max-width: 1200px;
-            height: 100%; /* Fills the screen minus the body padding */
+            height: 100%;
             background: white;
             border-radius: 20px;
             padding: 2vh 3vw;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             display: flex;
-            flex-direction: column; /* Stacks header, grid, and footer */
+            flex-direction: column;
             position: relative;
         }
 
@@ -41,7 +41,7 @@
             text-align: center;
             margin-bottom: 2vh;
             position: relative;
-            flex-shrink: 0; /* Prevents the header from squishing */
+            flex-shrink: 0;
         }
 
         .admin-button {
@@ -63,37 +63,38 @@
         }
 
         .header-icon {
-            font-size: clamp(2rem, 4vh, 3rem);
-            margin-bottom: 1vh;
+            font-size: clamp(1.8rem, 3.5vh, 2.5rem);
+            margin-bottom: 0.5vh;
         }
 
         h1 {
             color: #667eea;
-            font-size: clamp(1.5rem, 3.5vh, 2.5rem); /* Dynamic font sizing */
+            font-size: clamp(1.3rem, 3vh, 2.2rem);
             margin-bottom: 0.5vh;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s;
         }
 
         .subtitle {
             color: #666;
-            font-size: clamp(1rem, 2vh, 1.3rem);
+            font-size: clamp(0.9rem, 1.8vh, 1.2rem);
             font-weight: 500;
         }
 
         .characters-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr); /* Forces exactly 3 rows */
-            gap: 1.5vh 1.5vw;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1.2vh 1.2vw;
             margin-bottom: 2vh;
-            flex-grow: 1; /* Allows grid to take up all remaining vertical space */
-            min-height: 0; /* Critical: stops grid items from causing overflow */
+            flex-grow: 1;
+            min-height: 0;
         }
 
         .character-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 15px;
-            padding: 1vh;
+            border-radius: 12px;
+            padding: 0.5vh; /* Reduced padding to give images more space */
             cursor: pointer;
             transition: all 0.3s ease;
             border: 3px solid transparent;
@@ -106,15 +107,15 @@
         }
 
         .character-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
         }
 
         .character-card.selected {
             border-color: #667eea;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.6);
         }
 
         .character-card.selected .character-name {
@@ -133,13 +134,13 @@
             left: 5px;
             background: #4CAF50;
             color: white;
-            width: clamp(25px, 4vh, 40px);
-            height: clamp(25px, 4vh, 40px);
+            width: clamp(20px, 3vh, 30px);
+            height: clamp(20px, 3vh, 30px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(14px, 2vh, 24px);
+            font-size: clamp(12px, 1.8vh, 18px);
             font-weight: bold;
             animation: checkmark 0.3s ease;
         }
@@ -150,55 +151,58 @@
             100% { transform: scale(1) rotate(360deg); }
         }
 
+        /* Increased character image size */
         .character-image {
             width: auto;
             height: auto;
-            max-height: 12vh; /* Prevents large images from breaking the grid */
-            aspect-ratio: 1/1; /* Keeps images perfectly square */
+            max-height: 11.5vh; /* Increased from 9vh */
+            aspect-ratio: 1/1;
             object-fit: cover;
-            margin: 0 auto 1vh;
+            margin: 0 auto 0.8vh;
             display: block;
             border-radius: 50%;
-            border: 3px solid white;
+            border: 2px solid white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        /* Increased fallback size to match */
         .character-fallback {
-            width: 12vh;
-            height: 12vh;
+            width: 11.5vh;
+            height: 11.5vh;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 50%;
-            margin: 0 auto 1vh;
+            margin: 0 auto 0.8vh;
             align-items: center;
             justify-content: center;
             font-size: 4vh;
         }
 
         .character-name {
-            font-size: clamp(0.9rem, 2vh, 1.5rem);
+            font-size: clamp(0.8rem, 1.8vh, 1.2rem);
             color: #333;
             font-weight: 600;
             transition: color 0.3s ease;
         }
 
         .book-title {
-            font-size: clamp(0.7rem, 1.5vh, 1rem);
+            font-size: clamp(0.6rem, 1.2vh, 0.9rem);
             color: #999;
-            margin-top: 0.5vh;
+            margin-top: 0.3vh;
             transition: color 0.3s ease;
         }
 
         .vote-section {
             text-align: center;
-            flex-shrink: 0; /* Keeps footer pinned to the bottom */
+            flex-shrink: 0;
+            margin-bottom: 1vh;
         }
 
         .vote-button {
             background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
             border: none;
-            padding: 2vh 4vw;
-            font-size: clamp(1.2rem, 3vh, 1.8rem);
+            padding: 1.5vh 4vw;
+            font-size: clamp(1.1rem, 2.5vh, 1.5rem);
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
@@ -222,13 +226,47 @@
 
         .error-message {
             color: #f44336;
-            font-size: clamp(1rem, 2vh, 1.2rem);
-            margin-top: 1vh;
+            font-size: clamp(0.9rem, 1.8vh, 1.1rem);
+            margin-top: 0.5vh;
             font-weight: 600;
-            height: 2vh; /* Reserves space so text doesn't push elements up when it appears */
+            height: 1.8vh;
         }
 
-        /* Modal Styles (Unchanged mostly, just responsive sizing) */
+        .sheet-tabs {
+            display: flex;
+            background: #f5f7fa;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid #ddd;
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .sheet-tab {
+            flex: 1;
+            padding: 0.8vh; 
+            border: none;
+            background: transparent;
+            font-size: clamp(0.9rem, 1.5vh, 1.1rem); 
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-family: inherit;
+        }
+
+        .sheet-tab:hover {
+            background: #e4e8f0;
+        }
+
+        .sheet-tab.active {
+            color: #667eea;
+            background: white;
+            border-bottom: 3px solid #667eea;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -254,12 +292,12 @@
 
         .modal-content {
             background: white;
-            padding: 4vh;
-            border-radius: 30px;
+            padding: 3vh;
+            border-radius: 20px;
             text-align: center;
             animation: slideIn 0.3s ease;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -271,18 +309,18 @@
 
         .modal-content h2 {
             color: #4CAF50;
-            font-size: clamp(1.8rem, 4vh, 2.5rem);
-            margin-bottom: 2vh;
+            font-size: clamp(1.5rem, 3vh, 2rem);
+            margin-bottom: 1.5vh;
         }
 
         .modal-content p {
-            font-size: clamp(1.2rem, 2.5vh, 1.5rem);
+            font-size: clamp(1rem, 2vh, 1.3rem);
             color: #333;
         }
 
         .success-icon {
-            font-size: clamp(3rem, 8vh, 5rem);
-            margin-bottom: 2vh;
+            font-size: clamp(2.5rem, 6vh, 4rem);
+            margin-bottom: 1.5vh;
             animation: bounce 0.6s ease;
         }
 
@@ -291,9 +329,9 @@
             50% { transform: scale(1.3); }
         }
 
-        /* Admin Panel Styles */
         .admin-panel {
             text-align: right;
+            width: 90%;
         }
 
         .admin-panel h2 {
@@ -303,15 +341,17 @@
 
         .vote-stats {
             background: #f5f7fa;
-            padding: 2vh;
-            border-radius: 15px;
+            padding: 1.5vh;
+            border-radius: 12px;
             margin-bottom: 2vh;
+            max-height: 40vh;
+            overflow-y: auto;
         }
 
         .stat-row {
             display: flex;
             justify-content: space-between;
-            padding: 1vh;
+            padding: 0.8vh;
             border-bottom: 1px solid #ddd;
         }
 
@@ -320,21 +360,21 @@
         }
 
         .stat-character { font-weight: bold; color: #333; }
-        .stat-count { color: #667eea; font-weight: bold; font-size: 1.2rem; }
+        .stat-count { color: #667eea; font-weight: bold; font-size: 1.1rem; }
 
         .admin-buttons {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2vh;
+            margin-top: 1.5vh;
         }
 
         .admin-btn {
-            padding: 1.5vh 2vw;
+            padding: 1vh 1.5vw;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -350,29 +390,31 @@
 
         .password-input {
             width: 100%;
-            padding: 1.5vh;
-            font-size: 1.2rem;
+            padding: 1vh;
+            font-size: 1.1rem;
             border: 2px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 2vh;
+            border-radius: 8px;
+            margin-bottom: 1.5vh;
             text-align: center;
             font-family: inherit;
         }
 
         .total-votes {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #667eea;
             font-weight: bold;
-            margin-bottom: 2vh;
+            margin-bottom: 1.5vh;
         }
 
-        /* Responsive structural adjustments for small mobile phones */
         @media (max-width: 600px) {
             .characters-grid {
                 gap: 1vh 1vw;
             }
             .character-card {
                 padding: 0.5vh;
+            }
+            .sheet-tabs {
+                width: 90%;
             }
         }
     </style>
@@ -381,22 +423,25 @@
     <div class="container">
         <div class="header">
             <button class="admin-button" onclick="showAdminPanel()" title="Admin Panel">⚙️</button>
-            <div class="header-icon">📚</div>
-            <h1>ספריית נווה מונוסון</h1>
+            <div class="header-icon" id="pageIcon">📚</div>
+            <h1 id="pageTitle">ספריית נווה מונוסון</h1>
             <p class="subtitle">הצביעו לדמות האהובה עליכם!</p>
         </div>
 
         <div class="characters-grid" id="charactersGrid">
-            <!-- Characters will be dynamically inserted here -->
-        </div>
+            </div>
 
         <div class="vote-section">
             <button class="vote-button" id="voteButton" disabled>הצביעו עכשיו! 🗳️</button>
             <p class="error-message" id="errorMessage"></p>
         </div>
+
+        <div class="sheet-tabs">
+            <button class="sheet-tab active" id="tab1" onclick="switchSheet(1)">דמויות ספרות</button>
+            <button class="sheet-tab" id="tab2" onclick="switchSheet(2)">דמויות קומיקס</button>
+        </div>
     </div>
 
-    <!-- Success Modal -->
     <div class="modal" id="successModal">
         <div class="modal-content">
             <div class="success-icon">🎉</div>
@@ -405,7 +450,6 @@
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
     <div class="modal" id="adminModal">
         <div class="modal-content admin-panel">
             <h2>⚙️ פאנל ניהול</h2>
@@ -417,40 +461,52 @@
     </div>
 
     <script>
-        // Admin password (change this!)
         const ADMIN_PASSWORD = "6164";
 
-        // Character data - Actual characters from the library
-
-        const characters = [
+        // Sheet 1: Original Characters
+        const characters1 = [
             { id: 2, name: "ירון זהבי חסמבה", book: "ירון זהבי חסמבה", image: "char2.png" },
             { id: 1, name: "אן שרלי", book: "האסופית", image: "char1.png" },
             { id: 9, name: "אודי שחר", book: "ג'ינג'י", image: "char9.png" },
-
             { id: 5, name: "הרמיוני", book: "הארי פוטר", image: "char5.png" },
             { id: 4, name: "ציון כהן", book: "אל עצמי", image: "char4.png" },
             { id: 3, name: "בילבי", book: "בילבי בת גרב", image: "char3.png" },
-
             { id: 6, name: "אייבי ובין", book: "אייבי ובין", image: "char6.png" },
             { id: 7, name: "הנסיך הקטן", book: "הנסיך הקטן", image: "char7.png" },
             { id: 8, name: "ליסה", book: "מדריך לגיבורות על", image: "char8.png" }
         ];
 
-        let selectedCharacter = null;
+        // Sheet 2: Comic Characters (Placeholders 10-18)
+        const characters2 = [
+            { id: 10, name: "איש הכלב", book: "", image: "char10.png" },
+            { id: 11, name: "אוואטר", book: "", image: "char11.png" },
+            { id: 12, name: "מועדון הבייביסיטריות", book: "", image: "char12.png" },
+            { id: 13, name: "בון", book: "", image: "char13.png" },
+            { id: 14, name: "הילד הכחול", book: "", image: "char14.png" },
+            { id: 15, name: "זיטה", book: "", image: "char15.png" },
+            { id: 16, name: "מספיקה בקושי", book: "", image: "char16.png" },
+            { id: 17, name: "הקמע", book: "", image: "char17.png" },
+            { id: 18, name: "אדל", book: "", image: "char18.png" }
+        ];
 
-        // Initialize the grid
-        function initializeGrid() {
+        // Combine for admin logic and lookup
+        const allCharacters = [...characters1, ...characters2];
+
+        let selectedCharacter = null;
+        let currentSheet = 1;
+
+        function initializeGrid(characterArray) {
             const grid = document.getElementById('charactersGrid');
+            grid.innerHTML = ''; 
             
-            characters.forEach(character => {
+            characterArray.forEach(character => {
                 const card = document.createElement('div');
                 card.className = 'character-card';
                 card.dataset.id = character.id;
                 
-                // Replaced the inline-styled fallback with a clean CSS class to ensure responsive height
                 card.innerHTML = `
                     <img src="${character.image}" alt="${character.name}" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="character-fallback" style="display: none;">📚</div>
+                    <div class="character-fallback" style="display: none;">${currentSheet === 1 ? '📚' : '🦸‍♂️'}</div>
                     <div class="character-name">${character.name}</div>
                     <div class="book-title">${character.book}</div>
                 `;
@@ -460,7 +516,30 @@
             });
         }
 
-        // Handle character selection
+        function switchSheet(sheetNum) {
+            currentSheet = sheetNum;
+            
+            // Update Tab UI
+            document.querySelectorAll('.sheet-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(`tab${sheetNum}`).classList.add('active');
+
+            // Update Header Text and Grid
+            const pageTitle = document.getElementById('pageTitle');
+            const pageIcon = document.getElementById('pageIcon');
+
+            if (sheetNum === 1) {
+                pageTitle.textContent = "ספריית נווה מונוסון";
+                pageIcon.textContent = "📚";
+                initializeGrid(characters1);
+            } else {
+                pageTitle.textContent = "הצבעה לדמות קומיקס אהובה";
+                pageIcon.textContent = "🦸‍♂️";
+                initializeGrid(characters2);
+            }
+
+            resetVoting();
+        }
+
         function selectCharacter(id) {
             document.querySelectorAll('.character-card').forEach(card => {
                 card.classList.remove('selected');
@@ -474,7 +553,6 @@
             document.getElementById('errorMessage').textContent = '';
         }
 
-        // Handle vote submission
         function submitVote() {
             if (!selectedCharacter) {
                 document.getElementById('errorMessage').textContent = 'אנא בחרו דמות לפני ההצבעה';
@@ -485,35 +563,29 @@
             voteButton.disabled = true;
             voteButton.textContent = 'שולח הצבעה...';
 
-            // Save vote to localStorage
             saveVote(selectedCharacter);
 
-            // Show success
             setTimeout(() => {
                 showSuccessModal();
             }, 300);
         }
 
-        // Save vote to localStorage
         function saveVote(characterId) {
-            const characterName = characters.find(c => c.id === characterId).name;
+            const characterInfo = allCharacters.find(c => c.id === characterId);
             const timestamp = new Date().toISOString();
             
-            // Get existing votes
             let votes = JSON.parse(localStorage.getItem('libraryVotes') || '[]');
             
-            // Add new vote
             votes.push({
                 character_id: characterId,
-                character_name: characterName,
+                character_name: characterInfo.name,
+                category: currentSheet === 1 ? 'ספרות' : 'קומיקס',
                 timestamp: timestamp
             });
             
-            // Save back to localStorage
             localStorage.setItem('libraryVotes', JSON.stringify(votes));
         }
 
-        // Show success modal
         function showSuccessModal() {
             const modal = document.getElementById('successModal');
             modal.classList.add('show');
@@ -524,7 +596,6 @@
             }, 3000);
         }
 
-        // Reset voting interface
         function resetVoting() {
             selectedCharacter = null;
             document.querySelectorAll('.character-card').forEach(card => {
@@ -535,7 +606,6 @@
             document.getElementById('errorMessage').textContent = '';
         }
 
-        // Admin Panel Functions
         function showAdminPanel() {
             document.getElementById('adminModal').classList.add('show');
             document.getElementById('adminPassword').value = '';
@@ -554,9 +624,8 @@
         function showAdminStats() {
             const votes = JSON.parse(localStorage.getItem('libraryVotes') || '[]');
             
-            // Calculate statistics
             const stats = {};
-            characters.forEach(char => {
+            allCharacters.forEach(char => {
                 stats[char.id] = { name: char.name, count: 0 };
             });
             
@@ -566,9 +635,8 @@
                 }
             });
 
-            // Build stats HTML
             let statsHTML = `
-                <div class="total-votes">סה"כ הצבעות: ${votes.length}</div>
+                <div class="total-votes">סה"כ הצבעות בכללי: ${votes.length}</div>
                 <div class="vote-stats">
             `;
             
@@ -585,7 +653,7 @@
                 </div>
                 <div class="admin-buttons">
                     <button class="admin-btn export-btn" onclick="exportVotes()">📥 יצוא לקובץ CSV</button>
-                    <button class="admin-btn clear-btn" onclick="clearVotes()">🗑️ מחק את כל ההצבעות</button>
+                    <button class="admin-btn clear-btn" onclick="clearVotes()">🗑️ מחק הכל</button>
                     <button class="admin-btn close-btn" onclick="closeAdmin()">סגור</button>
                 </div>
             `;
@@ -601,13 +669,11 @@
                 return;
             }
 
-            // Create CSV content
-            let csv = 'Character ID,Character Name,Timestamp\n';
+            let csv = 'Character ID,Character Name,Category,Timestamp\n';
             votes.forEach(vote => {
-                csv += `${vote.character_id},"${vote.character_name}",${vote.timestamp}\n`;
+                csv += `${vote.character_id},"${vote.character_name}","${vote.category}",${vote.timestamp}\n`;
             });
 
-            // Create download link
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             const url = URL.createObjectURL(blob);
@@ -624,10 +690,10 @@
         }
 
         function clearVotes() {
-            if (confirm('האם אתה בטוח שברצונך למחוק את כל ההצבעות? פעולה זו אינה הפיכה!')) {
+            if (confirm('האם אתה בטוח שברצונך למחוק את כל ההצבעות משני העמודים? פעולה זו אינה הפיכה!')) {
                 localStorage.removeItem('libraryVotes');
                 alert('כל ההצבעות נמחקו!');
-                showAdminStats(); // Refresh stats
+                showAdminStats(); 
             }
         }
 
@@ -635,14 +701,12 @@
             document.getElementById('adminModal').classList.remove('show');
         }
 
-        // Close modals when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.classList.remove('show');
             }
         }
 
-        // Allow Enter key for password
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('adminPassword').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
@@ -651,11 +715,10 @@
             });
         });
 
-        // Event listeners
         document.getElementById('voteButton').addEventListener('click', submitVote);
 
-        // Initialize on page load
-        initializeGrid();
+        // Start on sheet 1
+        switchSheet(1);
     </script>
 </body>
 </html>
